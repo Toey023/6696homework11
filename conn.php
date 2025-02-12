@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "gpu";
+$dbname = "ex11";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);

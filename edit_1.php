@@ -23,10 +23,15 @@ include("conn.php");
 
     <style>
         body {
-            font-family: "Kanit", sans-serif;
-            margin-left: 100px;
-            margin-top: 50px;
-        }
+      font-family: "Kanit", sans-serif;
+      font-weight: 500;
+      font-style: normal;
+      margin-left: 100px;
+      margin-right: 0px;
+      margin-top: 100px;
+      margin-bottom: 200px;
+      color: #8B3A3A;
+             }
 
         h1 {
             /* อันนี้กำหนดส่วนย่อหน้าด้านซ้าย */
@@ -43,23 +48,23 @@ include("conn.php");
 <body>
     <br><br>
     <center>
-        <h1>แก้ไขข้อมูลการ์ดจอ</h1>
+        <h1>แก้ไขข้อมูลจัดเก็บผักครับบบบ</h1>
     </center>
     <?php
     //เริ่มเก็บข้อมูล
-    $id = $_POST['id'];
-    $brand = $_POST['brand'];
-    $model = $_POST['model'];
-    $memory_size = $_POST['memory_size'];
-    $memory_type = $_POST['memory_type'];
-    $clock_speed = $_POST['clock_speed'];
-    $price = $_POST['price'];
-    $release_year = $_POST['release_year'];
+    $vegetable_id = $_POST['vegetable_id'];
+    $veg_name = $_POST['veg_name'];
+    $type = $_POST['type'];
+    $quantity = $_POST['quantity'];
+    $season = $_POST['season'];
+    $collector = $_POST['collector'];
+    $treasury = $_POST['treasury'];
+
 
     //เขียนคำสั่ง SQL
 
 
-    $sql = "UPDATE graphics_cards SET brand='$brand',model='$model',memory_size='$memory_size',memory_type='$memory_type',clock_speed='$clock_speed',price='$price',release_year='$release_year' WHERE id=$id ";
+    $sql = "UPDATE จัดเก็บผัก SET veg_name='$veg_name',type='$type',quantity='$quantity',season='$season',collector='$collector',treasury='$treasury'  WHERE vegetable_id=$vegetable_id ";
 
     // รับคำสั่ง sql
     if ($conn->query($sql) === TRUE) {
@@ -74,7 +79,9 @@ include("conn.php");
     $conn->close();
     ?>
 
-    พัฒนาโดย 664485023 นายรวีโรจน์ ทองเปี่ยม <br>
+<br>
+    พัฒนาโดย
+    664485023 นายรวีโรจน์ ทองเปี่ยม <br>
     </head>
 
 </html>

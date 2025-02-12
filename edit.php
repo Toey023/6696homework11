@@ -22,117 +22,121 @@ include("conn.php");
 
     <style>
         body {
-            font-family: "Kanit", sans-serif;
-            margin-left: 100px;
-            margin-top: 50px;
+     font-family: "Kanit", sans-serif;
+      font-weight: 500;
+      font-style: normal;
+      margin-left: 700px;
+      margin-right: 0px;
+      margin-top: 100px;
+      margin-bottom: 200px;
+      color: #8B3A3A;
         }
 
         h1 {
             /* อันนี้กำหนดส่วนย่อหน้าด้านซ้าย */
-
+   
             /* อันนี้กำหนดส่วนย่อหน้าด้านบน */
             margin-top: 50px;
         }
     </style>
+    
 
-
-    <title>เเก้ไขข้อมูลพนักงาน</title>
+    <title>เเก้ไขข้อมูลจัดเก็บผักครับบบบ</title>
 </head>
 
 <?php
-if (isset($_GET['action_even']) == 'edit') {
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM graphics_cards WHERE id=$id";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-    } else {
-        echo "ไม่พบข้อมูลที่ต้องการแก้ไข กรุณาตรวจสอบ";
+if(isset($_GET['action_even'])=='edit'){
+    $vegetable_id=$_GET['vegetable_id'];
+    $sql="SELECT * FROM จัดเก็บผัก WHERE vegetable_id=$vegetable_id";
+    $result=$conn->query($sql);
+    if($result->num_rows>0){
+        $row=$result->fetch_assoc();
+    }else{
+        echo"ไม่พบข้อมูลที่ต้องการแก้ไข กรุณาตรวจสอบ";
     }
     //$conn->close();
 }
 ?>
 
-<h1>แก้ไขข้อมูลการ์ดจอ</h1>
-
+<h1>แก้ไขข้อมูลจัดเก็บผัก</h1>
 
 <form action="edit_1.php" method="POST">
-    <input type="hidden" name="id" value="<?php echo $row['employees_id']; ?>">
+    <input type="hidden"name="vegetable_id" value="<?php echo$row['vegetable_id']; ?>">
     <div class="row mb-3">
-        <label class="col-sm-1 col-form-label"> รหัส </label>
+        <label class="col-sm-1 col-form-label"> รหัสผัก </label>
         <div class="col-sm-2">
-            <label class="col-sm-1 col-form-label"> <?php echo $row['employees_id']; ?> </label>
+        <label class="col-sm-1 col-form-label"> <?php echo$row['vegetable_id']; ?> </label>
+
+        </div>
+
+        <div class="row mb-3">
+        <label class="col-sm-1 col-form-label"> ชื่อผัก </label>
+        <div class="col-sm-3">
+        <input type="text" name="veg_name" class="form-control" maxlength="50" value="<?php echo$row['veg_name']; ?>" required>
+        </div>
+    </div>
+
+        <div class="row mb-3">
+        <label class="col-sm-1 col-form-label"> ประเภท </label>
+        <div class="col-sm-3">
+        <select name="type" class="form-select" aria-label="Default select example">   
+            <option > กรุณาระบุประเภท </option>
+            <option value="ผักใบ"   <?php if ($row['type']=='ผักใบ'){ echo "selected";} ?> >ผักใบ</option>
+            <option value="ผักราก"  <?php if ($row['type']=='ผักราก'){ echo "selected";} ?>>ผักราก</option>
+            <option value="ผักผล" <?php if ($row['type']=='ผักผล'){ echo "selected";} ?>>ผักผล</option>
+        </select>
+        </div>
+    </div>
+
+        <div class="row mb-3">
+        <label class="col-sm-1 col-form-label"> จำนวน </label>  
+        <div class="col-sm-3">
+        <input type="text" name="quantity" class="form-control" maxlength="50" value="<?php echo$row['quantity']; ?>" required>
         </div>
     </div>
 
     <div class="row mb-3">
-        <label class="col-sm-1 col-form-label"> แบรนด์ </label>
-        <div class="col-sm-2">
-        <select class="form-select" name="brand" aria-label="Default select example">
-                <option >กรุณาระบุแบรนด์</option>
-                <option value="AMD" <?php if ($row['brand']=='AMD'){ echo "selected";} ?>>AMD</option>
-                <option value="NVIDIA" <?php if ($row['brand']=='NVIDIA'){ echo "selected";} ?>>NVIDIA</option>
+        <label class="col-sm-1 col-form-label"> ฤดูกาลผัก </label>
+        <div class="col-sm-3">
+        <select name="season" class="form-select" aria-label="Default select example">   
+            <option > กรุณาระบุคลัง </option>
+            <option value="ร้อน"   <?php if ($row['season']=='ร้อน'){ echo "selected";} ?>>ร้อน</option>
+            <option value="ฝน"  <?php if ($row['season']=='ฝน'){ echo "selected";} ?>>ฝน</option>
+            <option value="หนาว" <?php if ($row['season']=='หนาว'){ echo "selected";} ?>>หนาว</option>
         </select>
         </div>
     </div>
 
     <div class="row mb-3">
-        <label class="col-sm-1 col-form-label"> โมเดล </label>
-        <div class="col-sm-2">
-            <input type="text" name="model" class="form-control" maxlength="50" value="<?php echo $row['model']; ?>" required>
+        <label class="col-sm-1 col-form-label">ผู้จัดเก็บ </label>
+        <div class="col-sm-3">
+        <input type="text" name="collector" class="form-control" maxlength="50" value="<?php echo$row['collector']; ?>" required>
         </div>
     </div>
 
-    <div class="row mb-3">
-        <label class="col-sm-1 col-form-label"> ขนาดของmemory </label>
-        <div class="col-sm-2">
-        <input type="text" name="memory_size" class="form-control" maxlength="50" value="<?php echo $row['memory_size']; ?>" required>
-            </div>
-    </div>
-
-    <div class="row mb-3">
-        <label class="col-sm-1 col-form-label"> ชนิดของmemory </label>
-        <div class="col-sm-2">
-            <select class="form-select" name="memory_type" aria-label="Default select example">
-                <option >กรุณาระบุชนิดของmemory</option>
-                <option value="GDDR5" <?php if ($row['memory_type']=='GDDR5'){ echo "selected";} ?>>GDDR5</option>
-                <option value="GDDR6" <?php if ($row['memory_type']=='GDDR6'){ echo "selected";} ?>>GDDR6</option>
-                <option value="GDDR6X"<?php if ($row['memory_type']=='GDDR6X'){ echo "selected";} ?>>GDDR6X</option>
-                <option value="GDDR5X"<?php if ($row['memory_type']=='GDDR5X'){ echo "selected";} ?>>GDDR5X</option>
-                <option value="HBM2"<?php if ($row['memory_type']=='HBM2'){ echo "selected";} ?>>HBM2</option>
-
-            </select>
+        <div class="row mb-3">
+        <label class="col-sm-1 col-form-label"> สถานที่จัดเก็บ </label>
+        <div class="col-sm-3">
+        <select name="treasury" class="form-select" aria-label="Default select example">   
+            <option > กรุณาระบุคลัง </option>
+            <option value="คลังสินค้า A"   <?php if ($row['treasury']=='คลังสินค้า A'){ echo "selected";} ?>>คลังสินค้า A</option>
+            <option value="คลังสินค้า B"  <?php if ($row['treasury']=='คลังสินค้า B'){ echo "selected";} ?>>คลังสินค้า B</option>
+            <option value="คลังสินค้า C" <?php if ($row['treasury']=='คลังสินค้า C'){ echo "selected";} ?>>คลังสินค้า C</option>
+        </select>
         </div>
     </div>
 
-    <div class="row mb-3">
-        <label class="col-sm-1 col-form-label"> clock speed </label>
-        <div class="col-sm-2">
-            <input type="text" name="clock_speed" class="form-control" maxlength="50" value="<?php echo $row['clock_speed']; ?>" required>
-        </div>
     </div>
-
-    <div class="row mb-3">
-        <label class="col-sm-1 col-form-label"> ราคา </label>
-        <div class="col-sm-2">
-            <input type="text" name="price" class="form-control" maxlength="50" value="<?php echo $row['price']; ?>" required>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label class="col-sm-1 col-form-label"> ปีวางจำหน่าย </label>
-        <div class="col-sm-2">
-            <input type="text" name="release_year" class="form-control" maxlength="50" value="<?php echo $row['release_year']; ?>" required>
-        </div>
-    </div>
-
+   
 
     <button type="submit" class="btn btn-primary"> บันทึกข้อมูล</button>
     <button type="reset" class="btn btn-danger"> ยกเลิก</button>
 
 </form>
 <br>
-พัฒนาโดย 664485023 รวีโรจน์ ทองเปี่ยม <br>
+    พัฒนาโดย
+    664485023 นายรวีโรจน์ ทองเปี่ยม <br>
+
 </head>
 
 </html>
