@@ -57,11 +57,11 @@ if (isset($_GET['action_even']) == 'edit') {
 
 
 <form action="edit_1.php" method="POST">
-    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+    <input type="hidden" name="id" value="<?php echo $row['employees_id']; ?>">
     <div class="row mb-3">
         <label class="col-sm-1 col-form-label"> รหัส </label>
         <div class="col-sm-2">
-            <label class="col-sm-1 col-form-label"> <?php echo $row['id']; ?> </label>
+            <label class="col-sm-1 col-form-label"> <?php echo $row['employees_id']; ?> </label>
         </div>
     </div>
 
